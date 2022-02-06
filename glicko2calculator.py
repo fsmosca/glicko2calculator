@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '0.1.3'
+__version__ = '0.2.0'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -19,7 +19,7 @@ st.set_page_config(
     page_title="Glicko v2 Rating Calculator",
     layout="wide",
     initial_sidebar_state="expanded",
-    menu_items={'about': f'Glicko v2 Rating Calculator v{__version__}'}
+    menu_items={'about': f'[Glicko v2 Rating Calculator v{__version__}](https://github.com/fsmosca/glicko2calculator)'}
 )
 
 
