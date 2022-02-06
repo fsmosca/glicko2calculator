@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -99,18 +99,17 @@ def main():
         r1 = env.create_rating(st.session_state.rating1, st.session_state.rd1, st.session_state.vola1)
         r2 = env.create_rating(st.session_state.rating2, st.session_state.rd2, st.session_state.vola2)
 
+        p = [None, None]
         if result == '#1 wins':
-            p1, p2 = env.rate_1vs1(r1, r2, drawn=False)
+            p[0], p[1] = env.rate_1vs1(r1, r2, drawn=False)
         elif result == '#2 wins':
-            p2, p1 = env.rate_1vs1(r2, r1, drawn=False)
+            p[1], p[0] = env.rate_1vs1(r2, r1, drawn=False)
         else:
-            p1, p2 = env.rate_1vs1(r1, r2, drawn=True)
+            p[0], p[1] = env.rate_1vs1(r1, r2, drawn=True)
 
-        col1, col2 = st.columns(2)
-        with col1:
-            rating_update(p1, 1)
-        with col2:
-            rating_update(p2, 2)
+        for i, col in enumerate(st.columns(len(p))):
+            with col:
+                rating_update(p[i], 1+1)
 
     with st.expander(label='CREDITS'):
         st.markdown('''
