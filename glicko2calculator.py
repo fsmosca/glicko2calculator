@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -54,6 +54,14 @@ def data_input(num):
         key=f'vola{num}'
     )
 
+def rating_update(p, num):
+    st.markdown(f'''
+    ##### New Rating: {round(p.mu)}
+    New RD: **{round(p.phi)}**  
+    New Volatility: **{round(p.sigma, 8)}**  
+    Gain: **{round(p.mu - st.session_state[f'rating{num}'], 2):+0.2f}**
+    ''')
+
 
 def main():
     if not 'tau' in st.session_state:
@@ -100,19 +108,9 @@ def main():
 
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown(f'''
-            ##### New Rating: {round(p1.mu)}
-            New RD: **{round(p1.phi)}**  
-            New Volatility: **{round(p1.sigma, 8)}**  
-            Gain: **{round(p1.mu - st.session_state.rating1, 2):+0.2f}**
-            ''')
+            rating_update(p1, 1)
         with col2:
-            st.markdown(f'''
-            ##### New Rating: {round(p2.mu)}
-            New RD: **{round(p2.phi)}**  
-            New Volatility: **{round(p2.sigma, 8)}**  
-            Gain: **{round(p2.mu - st.session_state.rating2, 2):+1.2f}**
-            ''')
+            rating_update(p2, 2)
 
     with st.expander(label='CREDITS'):
         st.markdown('''
