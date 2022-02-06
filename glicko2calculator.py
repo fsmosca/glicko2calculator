@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -114,9 +114,9 @@ def main():
 
     with st.expander(label='CREDITS'):
         st.markdown('''
-        * [Mark Glickman](http://www.glicko.net/glicko.html)  
-        * [Sublee Glicko2 Library](https://github.com/sublee/glicko2)  
-        * [Streamlit](https://streamlit.io/)
+        [Mark Glickman](http://www.glicko.net/glicko.html)  
+        [Sublee Glicko2 Library](https://github.com/sublee/glicko2)  
+        [Streamlit](https://streamlit.io/)
         ''')
 
 
