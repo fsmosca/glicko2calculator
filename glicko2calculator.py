@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '0.2.0'
+__version__ = '0.3.0'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -59,7 +59,8 @@ def rating_update(p, num):
     ##### New Rating: {round(p.mu)}
     New RD: **{round(p.phi)}**  
     New Volatility: **{round(p.sigma, 8)}**  
-    Gain: **{round(p.mu - st.session_state[f'rating{num}'], 2):+0.2f}**
+    Gain: **{round(p.mu - st.session_state[f'rating{num}'], 2):+0.2f}**  
+    Rating Interval: **[{round(p.mu - 2*p.phi)}, {round(p.mu + 2*p.phi)}]**
     ''')
 
 
