@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '0.3.0'
+__version__ = '1.0.0'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -110,7 +110,7 @@ def main():
 
         for i, col in enumerate(st.columns(len(p))):
             with col:
-                rating_update(p[i], 1+1)
+                rating_update(p[i], i+1)
 
     with st.expander(label='CREDITS'):
         st.markdown('''
