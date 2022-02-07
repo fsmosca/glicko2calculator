@@ -5,7 +5,11 @@
 
 It calculates Glicko2 rating given 2 players data.
 
+
+
 You can visit the app at https://glicko2.herokuapp.com/.
+
+![image](https://user-images.githubusercontent.com/22366935/152715937-372cedef-ad44-437d-a320-df1834a334d9.png)
 
 ### Credits
 * [Mark Glickman](http://www.glicko.net/glicko.html)  
