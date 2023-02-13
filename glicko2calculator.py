@@ -28,6 +28,17 @@ if not 'vola1' in st.session_state:
 if not 'vola2' in st.session_state:
     st.session_state.vola2 = 0.06
 
+if not 'tau' in st.session_state:
+    st.session_state.tau = 0.5
+if not 'rating1' in st.session_state:
+    st.session_state.rating1 = 1500
+if not 'rating2' in st.session_state:
+    st.session_state.rating2 = 1500
+if not 'rd1' in st.session_state:
+    st.session_state.rd1 = 350
+if not 'rd2' in st.session_state:
+    st.session_state.rd2 = 350
+
 
 def data_input(num):
     st.markdown(f'''
@@ -65,17 +76,6 @@ def rating_update(p, num):
 
 
 def main():
-    if not 'tau' in st.session_state:
-        st.session_state.tau = 0.5
-    if not 'rating1' in st.session_state:
-        st.session_state.rating1 = 1500
-    if not 'rating2' in st.session_state:
-        st.session_state.rating2 = 1500
-    if not 'rd1' in st.session_state:
-        st.session_state.rd1 = 350
-    if not 'rd2' in st.session_state:
-        st.session_state.rd2 = 350
-
     st.sidebar.slider(
         label='Input TAU',
         min_value=0.1,
