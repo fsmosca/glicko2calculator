@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -17,7 +17,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Glicko v2 Rating Calculator",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="expanded",
     menu_items={'about': f'[Glicko v2 Rating Calculator v{__version__}](https://github.com/fsmosca/glicko2calculator)'}
 )
@@ -45,19 +45,19 @@ def data_input(num):
     ##### Player #{num}
     ''')
     st.number_input(
-        label='Input rating',
+        label='Rating',
         min_value=500,
         max_value=5000,
         key=f'rating{num}'
     )
     st.number_input(
-        label='Input rd',
+        label='Rating Deviation',
         min_value=0,
         max_value=350,
         key=f'rd{num}'
     )
     st.number_input(
-        label='Input volatility',
+        label='Rating Volatility',
         min_value=0.001,
         max_value=1.,
         step=0.00001,
@@ -67,7 +67,7 @@ def data_input(num):
 
 def rating_update(p, num):
     st.markdown(f'''
-    ##### New Rating: {round(p.mu)}
+    ##### New Rating: :green[{round(p.mu)}]
     New RD: **{round(p.phi)}**  
     New Volatility: **{round(p.sigma, 8)}**  
     Gain: **{round(p.mu - st.session_state[f'rating{num}'], 2):+0.2f}**  
@@ -76,15 +76,23 @@ def rating_update(p, num):
 
 
 def main():
-    st.sidebar.slider(
-        label='Input TAU',
-        min_value=0.1,
-        max_value=3.0,
-        key='tau',
-        help='default=0.5, min=0.1, max=3.0'
-    )
+    st.header('Glicko v2 Rating Calculator')
 
-    with st.expander(label='CALCULATION', expanded=True):
+    calculation_tab, setting_tab, credits_tab = st.tabs(
+        [':chart: CALCULATION', ':hammer_and_wrench: SETTING', ':heavy_dollar_sign: CREDITS'])
+
+    with setting_tab:
+        st.slider(
+            label='Input TAU',
+            min_value=0.1,
+            max_value=3.0,
+            key='tau',
+            help='''Smaller values prevent the volatility measures
+            from changing by large amounts which in turn prevents enormous
+            changes in ratings based on very imporbable results'''
+        )
+
+    with calculation_tab:
         col1, col2 = st.columns(2)
         with col1:
             data_input(1)
@@ -92,7 +100,7 @@ def main():
             data_input(2)
 
         result = st.selectbox(
-            label='Select result',
+            label=':triangular_flag_on_post: Select result',
             options=['#1 wins', '#2 wins', 'draw'],
         )                      
 
@@ -112,7 +120,7 @@ def main():
             with col:
                 rating_update(p[i], i+1)
 
-    with st.expander(label='CREDITS'):
+    with credits_tab:
         st.markdown('''
         [Mark Glickman](http://www.glicko.net/glicko.html)  
         [Sublee Glicko2 Library](https://github.com/sublee/glicko2)  
