@@ -9,7 +9,14 @@ It calculates Glicko2 rating given 2 players data.
 
 You can visit the app at https://glicko2-calculator.streamlit.app/.
 
-![image](https://user-images.githubusercontent.com/22366935/152715937-372cedef-ad44-437d-a320-df1834a334d9.png)
+## Calculation
+
+![image](https://github.com/fsmosca/glicko2calculator/assets/22366935/e42ec7ef-6798-46a6-98b3-988efda49a7f)
+
+## Setting
+
+![image](https://github.com/fsmosca/glicko2calculator/assets/22366935/93401992-c7ed-413c-ae09-bbef8753e859)
+
 
 ### Credits
 * [Mark Glickman](http://www.glicko.net/glicko.html)  
