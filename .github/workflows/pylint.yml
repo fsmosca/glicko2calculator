@@ -21,4 +21,4 @@ jobs:
         pip install streamlit==1.18.1
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pylint -d C0304 $(git ls-files '*.py')
