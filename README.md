@@ -18,7 +18,7 @@ You can visit the app at https://glicko2-calculator.streamlit.app/.
 ![image](https://github.com/fsmosca/glicko2calculator/assets/22366935/93401992-c7ed-413c-ae09-bbef8753e859)
 
 
-### Credits
+## Credits
 * [Mark Glickman](http://www.glicko.net/glicko.html)  
 * [Sublee Glicko2 Library](https://github.com/sublee/glicko2)  
 * [Streamlit](https://streamlit.io/)
