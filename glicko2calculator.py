@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '1.1.0'
+__version__ = '1.2.0'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -21,6 +21,9 @@ st.set_page_config(
     initial_sidebar_state="expanded",
     menu_items={'about': f'[Glicko v2 Rating Calculator v{__version__}](https://github.com/fsmosca/glicko2calculator)'}
 )
+
+
+Z_SCORES = {'90%': 1.645, '95%': 1.96, '99%': 2.576}
 
 
 if not 'vola1' in st.session_state:
@@ -65,13 +68,16 @@ def data_input(num):
         key=f'vola{num}'
     )
 
-def rating_update(p, num):
+def rating_update(p, num, confidence_level):
+    lower_rating = round(p.mu - Z_SCORES[confidence_level]*p.phi)
+    upper_rating = round(p.mu + Z_SCORES[confidence_level]*p.phi)
+                    
     st.markdown(f'''
     ##### New Rating: :green[{round(p.mu)}]
     New RD: **{round(p.phi)}**  
     New Volatility: **{round(p.sigma, 8)}**  
     Gain: **{round(p.mu - st.session_state[f'rating{num}'], 2):+0.2f}**  
-    Rating Interval: **[{round(p.mu - 2*p.phi)}, {round(p.mu + 2*p.phi)}]**
+    Rating Interval: **[{lower_rating}, {upper_rating}]**
     ''')
 
 
@@ -90,6 +96,13 @@ def main():
             help='''Smaller values prevent the volatility measures
             from changing by large amounts which in turn prevents enormous
             changes in ratings based on very imporbable results'''
+        )
+
+        confidence_level = st.selectbox(
+            'Confidence Level',
+            options=['90%', '95%', '99%'],
+            index=1,
+            key='confidence_level_k'
         )
 
     with calculation_tab:
@@ -118,7 +131,7 @@ def main():
 
         for i, col in enumerate(st.columns(len(p))):
             with col:
-                rating_update(p[i], i+1)
+                rating_update(p[i], i+1, confidence_level)
 
     with credits_tab:
         st.markdown('''
