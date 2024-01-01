@@ -5,21 +5,27 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '1.2.1'
+__version__ = '1.3.0'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
 
 
-from glicko2 import Glicko2
 import streamlit as st
+from glicko2 import Glicko2
+
+
+APP_NAME = 'Glicko v2 Rating Calculator'
+APP_LINK = 'https://github.com/fsmosca/glicko2calculator'
 
 
 st.set_page_config(
     page_title="Glicko v2 Rating Calculator",
     layout="centered",
     initial_sidebar_state="expanded",
-    menu_items={'about': f'[Glicko v2 Rating Calculator v{__version__}](https://github.com/fsmosca/glicko2calculator)'}
+    menu_items={
+        'about': f'[{APP_NAME} v{__version__}]({APP_LINK})'
+    }
 )
 
 
@@ -35,15 +41,16 @@ if 'tau' not in st.session_state:
     st.session_state.tau = 0.5
 if 'rating1' not in st.session_state:
     st.session_state.rating1 = 1500
-if not 'rating2' in st.session_state:
+if 'rating2' not in st.session_state:
     st.session_state.rating2 = 1500
-if not 'rd1' in st.session_state:
+if 'rd1' not in st.session_state:
     st.session_state.rd1 = 350
-if not 'rd2' in st.session_state:
+if 'rd2' not in st.session_state:
     st.session_state.rd2 = 350
 
 
 def data_input(num):
+    """Builds widgets."""
     st.markdown(f'''
     ##### Player #{num}
     ''')
@@ -69,9 +76,10 @@ def data_input(num):
     )
 
 def rating_update(p, num, confidence_level):
+    """Shows rating calculation results."""
     lower_rating = round(p.mu - Z_SCORES[confidence_level]*p.phi)
     upper_rating = round(p.mu + Z_SCORES[confidence_level]*p.phi)
-                    
+
     st.markdown(f'''
     ##### New Rating: :green[{round(p.mu)}]
     New RD: **{round(p.phi)}**  
@@ -82,6 +90,7 @@ def rating_update(p, num, confidence_level):
 
 
 def main():
+    """App main entry point."""
     st.header('Glicko v2 Rating Calculator')
 
     calculation_tab, setting_tab, credits_tab = st.tabs(
@@ -115,11 +124,19 @@ def main():
         result = st.selectbox(
             label=':triangular_flag_on_post: Select result',
             options=['#1 wins', '#2 wins', 'draw'],
-        )                      
+        )
 
         env = Glicko2(tau=float(st.session_state.tau))
-        r1 = env.create_rating(st.session_state.rating1, st.session_state.rd1, st.session_state.vola1)
-        r2 = env.create_rating(st.session_state.rating2, st.session_state.rd2, st.session_state.vola2)
+        r1 = env.create_rating(
+            st.session_state.rating1,
+            st.session_state.rd1,
+            st.session_state.vola1
+        )
+        r2 = env.create_rating(
+            st.session_state.rating2,
+            st.session_state.rd2,
+            st.session_state.vola2
+        )
 
         p = [None, None]
         if result == '#1 wins':
