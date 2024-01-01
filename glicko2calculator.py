@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -26,14 +26,14 @@ st.set_page_config(
 Z_SCORES = {'90%': 1.645, '95%': 1.96, '99%': 2.576}
 
 
-if not 'vola1' in st.session_state:
+if 'vola1' not in st.session_state:
     st.session_state.vola1 = 0.06
-if not 'vola2' in st.session_state:
+if 'vola2' not in st.session_state:
     st.session_state.vola2 = 0.06
 
-if not 'tau' in st.session_state:
+if 'tau' not in st.session_state:
     st.session_state.tau = 0.5
-if not 'rating1' in st.session_state:
+if 'rating1' not in st.session_state:
     st.session_state.rating1 = 1500
 if not 'rating2' in st.session_state:
     st.session_state.rating2 = 1500
