@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '1.3.0'
+__version__ = '1.4.0'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -149,6 +149,19 @@ def main():
         for i, col in enumerate(st.columns(len(p))):
             with col:
                 rating_update(p[i], i+1, confidence_level)
+
+        with st.expander('**Definitions**', expanded=False):
+            st.markdown('''**Volatility**  
+The volatility measure indicates the degree of expected fluctuation in a player’s
+rating. The volatility measure is high when a player has erratic performances (e.g., when
+the player has had exceptionally strong results after a period of stability), and the volatility
+measure is low when the player performs at a consistent level.  
+                        
+**Rating deviation**  
+RD is a numerical value that represents the confidence level in a player's rating. A lower RD indicates higher confidence in the rating, meaning the rating is more accurate.
+A higher RD indicates less confidence in the rating, meaning the rating is more volatile or uncertain.
+                        ''')
+
 
     with credits_tab:
         st.markdown('''
