@@ -87,10 +87,10 @@ def data_input(num):
     )
 
 
-def rating_update(p, num, confidence_level):
+def rating_update(p, num):
     """Shows rating calculation results."""
-    lower_rating = round(p.mu - Z_SCORES[confidence_level]*p.phi)
-    upper_rating = round(p.mu + Z_SCORES[confidence_level]*p.phi)
+    lower_rating = round(p.mu - Z_SCORES[st.session_state.confidence_level_k]*p.phi)
+    upper_rating = round(p.mu + Z_SCORES[st.session_state.confidence_level_k]*p.phi)
 
     st.markdown(f'''
     ##### New Rating: :green[{round(p.mu)}]
@@ -122,7 +122,7 @@ def main():
             changes in ratings based on very imporbable results'''
         )
 
-        confidence_level = st.selectbox(
+        st.selectbox(
             'Confidence Level',
             options=['90%', '95%', '99%'],
             index=1,
@@ -163,7 +163,7 @@ def main():
 
         for i, col in enumerate(st.columns(len(p))):
             with col:
-                rating_update(p[i], i+1, confidence_level)
+                rating_update(p[i], i+1)
 
         with st.expander('**Definitions**', expanded=False):
             st.markdown('''**Volatility**<br>
