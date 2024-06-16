@@ -29,6 +29,17 @@ st.set_page_config(
 )
 
 
+st.markdown("""
+    <style>
+        /* Remove blank space at top and bottom */
+        .block-container {
+            padding-top: 1.5rem;
+            padding-bottom: 1rem;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+
 Z_SCORES = {'90%': 1.645, '95%': 1.96, '99%': 2.576}
 
 
@@ -94,8 +105,11 @@ def main():
     """App main entry point."""
     st.header('Glicko v2 Rating Calculator')
 
+    st.markdown(__about__)
+
     calculation_tab, setting_tab, credits_tab = st.tabs(
-        [':chart: CALCULATION', ':hammer_and_wrench: SETTING', ':heavy_dollar_sign: CREDITS'])
+        [':chart: CALCULATION',
+         ':hammer_and_wrench: SETTING', ':heavy_dollar_sign: CREDITS'])
 
     with setting_tab:
         st.slider(
@@ -153,15 +167,17 @@ def main():
 
         with st.expander('**Definitions**', expanded=False):
             st.markdown('''**Volatility**<br>
-The volatility measure indicates the degree of expected fluctuation in a player's
-rating. The volatility measure is high when a player has erratic performances (e.g., when
-the player has had exceptionally strong results after a period of stability), and the volatility
-measure is low when the player performs at a consistent level.
+The volatility measure indicates the degree of expected fluctuation in a
+player's rating. The volatility measure is high when a player has erratic
+performances (e.g., when the player has had exceptionally strong results
+after a period of stability), and the volatility measure is low when the
+player performs at a consistent level.
 
 **Rating deviation**<br>
-RD is a numerical value that represents the confidence level in a player's rating. A lower RD indicates higher confidence in the rating, meaning the rating is more accurate.
-A higher RD indicates less confidence in the rating, meaning the rating is more volatile or uncertain.
-                        ''', unsafe_allow_html=True)
+RD is a numerical value that represents the confidence level in a player's
+rating. A lower RD indicates higher confidence in the rating, meaning the
+rating is more accurate. A higher RD indicates less confidence in the rating,
+meaning the rating is more volatile or uncertain.''', unsafe_allow_html=True)
 
     with credits_tab:
         st.markdown('''
