@@ -63,7 +63,7 @@ def data_input(num):
     st.number_input(
         label='Rating Deviation',
         min_value=0,
-        max_value=350,
+        max_value=1000,
         key=f'rd{num}'
     )
     st.number_input(
