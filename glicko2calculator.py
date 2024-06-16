@@ -75,6 +75,7 @@ def data_input(num):
         key=f'vola{num}'
     )
 
+
 def rating_update(p, num, confidence_level):
     """Shows rating calculation results."""
     lower_rating = round(p.mu - Z_SCORES[confidence_level]*p.phi)
@@ -151,24 +152,23 @@ def main():
                 rating_update(p[i], i+1, confidence_level)
 
         with st.expander('**Definitions**', expanded=False):
-            st.markdown('''**Volatility**  
-The volatility measure indicates the degree of expected fluctuation in a player’s
+            st.markdown('''**Volatility**<br>
+The volatility measure indicates the degree of expected fluctuation in a player's
 rating. The volatility measure is high when a player has erratic performances (e.g., when
 the player has had exceptionally strong results after a period of stability), and the volatility
-measure is low when the player performs at a consistent level.  
-                        
-**Rating deviation**  
+measure is low when the player performs at a consistent level.
+
+**Rating deviation**<br>
 RD is a numerical value that represents the confidence level in a player's rating. A lower RD indicates higher confidence in the rating, meaning the rating is more accurate.
 A higher RD indicates less confidence in the rating, meaning the rating is more volatile or uncertain.
-                        ''')
-
+                        ''', unsafe_allow_html=True)
 
     with credits_tab:
         st.markdown('''
-        [Mark Glickman](http://www.glicko.net/glicko.html)  
-        [Sublee Glicko2 Library](https://github.com/sublee/glicko2)  
+        [Mark Glickman](http://www.glicko.net/glicko.html)<br>
+        [Sublee Glicko2 Library](https://github.com/sublee/glicko2)<br>
         [Streamlit](https://streamlit.io/)
-        ''')
+        ''', unsafe_allow_html=True)
 
 
 if __name__ == '__main__':
