@@ -24,7 +24,9 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="expanded",
     menu_items={
-        'about': f'[{APP_NAME} v{__version__}]({APP_LINK})'
+        'about': f'''[{APP_NAME} v{__version__}]({APP_LINK})  
+        Calculates Glicko2 rating between two players.
+        '''
     }
 )
 
