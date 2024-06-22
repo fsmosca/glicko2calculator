@@ -5,7 +5,7 @@ A streamlit web app used to calculate glicko2 rating between two players.
 
 """
 
-__version__ = '1.4.0'
+__version__ = '1.4.1'
 __author__ = 'fsmosca'
 __script_name__ = 'glicko2calculator'
 __about__ = 'A streamlit web app used to calculate glicko2 rating between two players.'
@@ -107,11 +107,11 @@ def main():
 
     st.markdown(__about__)
 
-    calculation_tab, setting_tab, credits_tab = st.tabs(
+    calculation_tab, settings_tab, credits_tab = st.tabs(
         [':chart: CALCULATION',
-         ':hammer_and_wrench: SETTING', ':heavy_dollar_sign: CREDITS'])
+         ':hammer_and_wrench: SETTINGS', ':heavy_dollar_sign: CREDITS'])
 
-    with setting_tab:
+    with settings_tab:
         st.slider(
             label='Input TAU',
             min_value=0.1,
@@ -119,7 +119,7 @@ def main():
             key='tau',
             help='''Smaller values prevent the volatility measures
             from changing by large amounts which in turn prevents enormous
-            changes in ratings based on very imporbable results'''
+            changes in ratings based on very improbable results.'''
         )
 
         st.selectbox(
